@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import AddUser from './Components/Users/AddUser';
+//import Display from './Components/Users/Display';
+import UserList from './Components/Users/UserList';
 
-function App() {
+const App=(props)=> {
+
+  const data=[
+
+    {username:'Abhishek',age:24},
+    {username:'Ayush',age:17},
+    {username:'Preeti',age:48},
+    {username:'Darshan',age:52},
+    {username:'Akash',age:17}
+
+  ]
+
+  const [udata,SetUdata]=useState(data);//to store data comming from form
+
+  const addUsers=(parentdata)=>{
+      //console.log(parentdata);
+      SetUdata((prevData)=>{return ([parentdata,...prevData])})
+      console.log(udata);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   <div className="App">
+     <AddUser addUsers={addUsers}/> 
+     <UserList users={udata}/>
     </div>
   );
 }
